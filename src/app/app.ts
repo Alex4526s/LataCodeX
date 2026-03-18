@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = 'Code Soft Lata';
+  protected readonly title = 'LataCodeX';
   protected readonly whatsappNumbers = [
     { phone: '0996866110', link: 'https://wa.me/593996866110' },
     { phone: '0998746535', link: 'https://wa.me/593998746535' }
