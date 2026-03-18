@@ -24,7 +24,7 @@ export class App {
   protected readonly redesSociales = [
     { nombre: 'TikTok', url: 'https://www.tiktok.com/@latacodex' },
     { nombre: 'Instagram', url: 'https://www.instagram.com/latacodex?igsh=MTAyeDhxZThvcXVsaQ==' },
-    { nombre: 'Facebook', url: '#' }
+    { nombre: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61580792023259' }
   ];
 
   public publicidad = [
