@@ -1,0 +1,75 @@
+<header class="navbar">
+  <div class="navbar-content">
+    <div class="brand">
+      <img class="logo" src="image.png" alt="CodeSoftLata Logo" />
+      <span class="brand-text">{{ title }}</span>
+    </div>
+    <a class="nav-cta" [href]="mainWhatsappLink" target="_blank" rel="noopener noreferrer">Contactar ahora</a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero glass-panel">
+    <div class="hero-content">
+      <h1 class="hero-title">Desarrollando soluciones, <span class="highlight">creando futuro.</span></h1>
+      <p class="hero-subtitle">Transformamos tus ideas en plataformas digitales de alto impacto.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" [href]="mainWhatsappLink" target="_blank" rel="noopener noreferrer">Inicia tu proyecto</a>
+        <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services/Ads Section -->
+  <section id="servicios" class="services">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <p class="section-text">Soluciones tecnológicas adaptadas a las necesidades de tu negocio.</p>
+    </div>
+    
+    <div class="cards-grid">
+      @for (item of publicidad; track item.titulo) {
+        <article class="service-card glass-card">
+          <div class="card-icon">{{ item.icon }}</div>
+          <h3 class="card-title">{{ item.titulo }}</h3>
+          <p class="card-desc">{{ item.descripcion }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</main>
+
+<footer class="footer glass-panel">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img class="logo-small" src="image.png" alt="CodeSoftLata Logo" />
+      <p class="footer-tagline">Soluciones tecnológicas desde Latacunga.</p>
+    </div>
+    
+    <div class="footer-contact">
+      <h4>Contacto</h4>
+      <p>
+        <strong>WhatsApp:</strong> 
+        @for (wa of whatsappNumbers; track wa.phone) {
+          <br/>&nbsp;&nbsp;<a [href]="wa.link" target="_blank" rel="noopener noreferrer">{{ wa.phone }}</a>
+        }
+      </p>
+      <p><strong>Correo:</strong>&nbsp;&nbsp;<a [href]="'mailto:' + email">{{ email }}</a></p>
+    </div>
+
+    <div class="footer-social">
+      <h4>Redes Sociales</h4>
+      <ul class="social-links">
+        @for (red of redesSociales; track red.nombre) {
+          <li>
+            <a [href]="red.url" target="_blank" rel="noopener noreferrer">{{ red.nombre }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 {{ title }}. Todos los derechos reservados.</p>
+  </div>
+</footer>

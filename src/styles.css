@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* =========================================================================
+   DESIGN SYSTEM & VARIABLES
+   ========================================================================= */
+:root {
+  /* Colors - Matched from image */
+  --bg-primary: #031238;
+  --bg-secondary: #0a2158;
+  --text-main: #ffffff;
+  --text-muted: #b3c5e7;
+  --accent-cyan: #00d2ff;
+  --accent-green: #00e676;
+  
+  /* Gradients */
+  --gradient-bg: radial-gradient(circle at top center, #0a2158 0%, #031238 70%);
+  --gradient-primary: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  --gradient-glass: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  
+  /* Shadows & Glass */
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --neon-glow: 0 0 15px rgba(0, 240, 255, 0.4);
+  
+  /* Spacing & Typography */
+  --font-body: 'Outfit', sans-serif;
+  --max-width: 1200px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   GLOBAL RESET
+   ========================================================================= */
+body {
+  display: block;
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  background-image: var(--gradient-bg);
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+a:hover {
+  text-shadow: var(--neon-glow);
+}
