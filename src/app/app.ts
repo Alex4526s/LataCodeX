@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+type CategoriaServicio = 'todos' | 'web' | 'automatizacion' | 'soporte' | 'academico';
+
 @Component({
   selector: 'app-root',
   imports: [],
@@ -8,6 +10,10 @@ import { Component } from '@angular/core';
 })
 export class App {
   protected readonly title = 'LataCodeX';
+  protected categoriaActiva: CategoriaServicio = 'todos';
+  protected terminoBusqueda = '';
+  protected mensajeCopia = '';
+
   protected readonly whatsappNumbers = [
     { phone: '0996866110', link: 'https://wa.me/593996866110' },
     { phone: '0998746535', link: 'https://wa.me/593998746535' }
@@ -21,26 +27,86 @@ export class App {
     { nombre: 'Facebook', url: '#' }
   ];
 
-  protected readonly publicidad = [
+  public publicidad = [
     {
       titulo: 'Promoción de Desarrollo Web',
       descripcion: 'Creamos tu página web profesional con diseño moderno y adaptable.',
-      icon: '🚀'
+      infoAdicional: 'Plan profesional: configuración de dominio y hosting, diseño responsive y botón directo a WhatsApp.',
+      categoria: 'web',
+      icon: '🚀',
+      flipped: false
     },
     {
       titulo: 'Automatización para Negocios',
       descripcion: 'Digitaliza procesos y ahorra tiempo con soluciones a medida.',
-      icon: '⚙️'
+      infoAdicional: 'Te ayudamos a eliminar tareas repetitivas. Desde facturación automática hasta integración de hojas de cálculo (Excel/Google Sheets) con tus bases de datos y sistemas de ventas.',
+      categoria: 'automatizacion',
+      icon: '⚙️',
+      flipped: false
     },
     {
       titulo: 'Soporte y Mantenimiento',
       descripcion: 'Actualizaciones, mejoras y respaldo para tus sistemas.',
-      icon: '🛠️'
+      infoAdicional: 'Servicio técnico continuo. Aseguramos que tus aplicaciones jamás se caigan, realizamos respaldos de seguridad semanales y aplicamos mejoras de rendimiento.',
+      categoria: 'soporte',
+      icon: '🛠️',
+      flipped: false
     },
     {
       titulo: 'Ayuda Académica',
-      descripcion: 'Asesoría y soporte para tareas y tesis en escuelas, colegios, universidades y cualquier centro educativo.',
-      icon: '📚'
+      descripcion: 'Brindamos ayuda en todas las áreas educativas y en todos los niveles de formación.',
+      infoAdicional: 'Ofrecemos asesoría para tareas, proyectos y tesis en primaria, secundaria, bachillerato, institutos y universidad. Incluye tutorías personalizadas y acompañamiento académico integral.',
+      categoria: 'academico',
+      icon: '📚',
+      flipped: false
     }
   ];
+
+  protected get publicidadFiltrada() {
+    const termino = this.terminoBusqueda.toLowerCase().trim();
+
+    return this.publicidad.filter((item) => {
+      const coincideCategoria = this.categoriaActiva === 'todos' || item.categoria === this.categoriaActiva;
+      const coincideTexto =
+        !termino ||
+        item.titulo.toLowerCase().includes(termino) ||
+        item.descripcion.toLowerCase().includes(termino) ||
+        item.infoAdicional.toLowerCase().includes(termino);
+
+      return coincideCategoria && coincideTexto;
+    });
+  }
+
+  protected cambiarCategoria(categoria: CategoriaServicio) {
+    this.categoriaActiva = categoria;
+    this.resetearTarjetas();
+  }
+
+  protected actualizarBusqueda(valor: string) {
+    this.terminoBusqueda = valor;
+    this.resetearTarjetas();
+  }
+
+  protected limpiarFiltros() {
+    this.categoriaActiva = 'todos';
+    this.terminoBusqueda = '';
+    this.resetearTarjetas();
+  }
+
+  protected async copiarWhatsApp(phone: string) {
+    try {
+      await navigator.clipboard.writeText(phone);
+      this.mensajeCopia = `Numero ${phone} copiado al portapapeles.`;
+    } catch {
+      this.mensajeCopia = 'No se pudo copiar automaticamente. Copialo manualmente.';
+    }
+
+    setTimeout(() => {
+      this.mensajeCopia = '';
+    }, 2500);
+  }
+
+  private resetearTarjetas() {
+    this.publicidad = this.publicidad.map((item) => ({ ...item, flipped: false }));
+  }
 }

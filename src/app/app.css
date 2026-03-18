@@ -199,6 +199,65 @@
   font-size: 1.1rem;
 }
 
+.service-toolbar {
+  margin-top: 26px;
+  display: grid;
+  gap: 14px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.98rem;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: rgba(0, 210, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.16);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.chip {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: #dce6ff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.chip:hover {
+  border-color: rgba(0, 210, 255, 0.5);
+  color: #fff;
+}
+
+.chip.active {
+  background: rgba(0, 210, 255, 0.18);
+  border-color: rgba(0, 210, 255, 0.6);
+  color: #fff;
+}
+
+.chip-clear {
+  color: #9ad8ff;
+}
+
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -206,17 +265,70 @@
   margin-bottom: 48px;
 }
 
+.empty-state {
+  min-height: 200px;
+  padding: 28px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 28, 75, 0.55);
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+}
+
 .service-card {
+  perspective: 1200px;
+  cursor: pointer;
+  min-height: 350px;
+}
+
+.card-inner {
+  display: grid;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  height: 100%;
+}
+
+.service-card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card:hover .card-inner {
+  transform: translateY(-8px);
+}
+
+.service-card.is-flipped:hover .card-inner {
+  transform: translateY(-8px) rotateY(180deg);
+}
+
+.card-front, .card-back {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background: rgba(10, 33, 88, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-md);
   padding: 32px;
-  transition: all var(--transition-smooth);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.service-card::after {
+.card-back {
+  transform: rotateY(180deg);
+  background: rgba(5, 20, 50, 0.95);
+  border-color: rgba(0, 210, 255, 0.4);
+}
+
+.card-front::after, .card-back::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -229,15 +341,20 @@
   transition: transform var(--transition-smooth);
 }
 
-.service-card:hover {
-  transform: translateY(-8px);
-  background: rgba(10, 33, 88, 0.8);
-  border-color: rgba(0, 210, 255, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+.service-card:hover .card-front::after,
+.service-card:hover .card-back::after {
+  transform: scaleX(1);
 }
 
-.service-card:hover::after {
-  transform: scaleX(1);
+.flip-hint {
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  margin-top: auto;
+  padding-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  opacity: 0.8;
 }
 
 .card-icon {
@@ -317,6 +434,34 @@
   margin-bottom: 12px;
 }
 
+.contact-line {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 8px 0 0 0;
+}
+
+.copy-btn {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 210, 255, 0.45);
+  background: rgba(0, 210, 255, 0.1);
+  color: #c9f3ff;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+  background: rgba(0, 210, 255, 0.2);
+}
+
+.copy-msg {
+  color: #a4fff0 !important;
+  font-size: 0.9rem;
+}
+
 .social-links {
   list-style: none;
 }
@@ -370,6 +515,19 @@
   .hero-actions {
     flex-direction: column;
   }
+
+  .service-toolbar {
+    margin-top: 20px;
+  }
+
+  .chips {
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 7px 12px;
+    font-size: 0.86rem;
+  }
   
   .btn {
     width: 100%;
@@ -383,6 +541,10 @@
   
   .footer-tagline {
     margin: 0 auto;
+  }
+
+  .contact-line {
+    justify-content: center;
   }
 }
 

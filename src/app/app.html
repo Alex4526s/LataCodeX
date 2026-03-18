@@ -26,14 +26,51 @@
     <div class="section-header">
       <h2 class="section-title">Nuestros Servicios</h2>
       <p class="section-text">Soluciones tecnológicas adaptadas a las necesidades de tu negocio.</p>
+
+      <div class="service-toolbar">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Buscar servicio..."
+          [value]="terminoBusqueda"
+          (input)="actualizarBusqueda($any($event.target).value)"
+        />
+
+        <div class="chips">
+          <button type="button" class="chip" [class.active]="categoriaActiva === 'todos'" (click)="cambiarCategoria('todos')">Todos</button>
+          <button type="button" class="chip" [class.active]="categoriaActiva === 'web'" (click)="cambiarCategoria('web')">Web</button>
+          <button type="button" class="chip" [class.active]="categoriaActiva === 'automatizacion'" (click)="cambiarCategoria('automatizacion')">Automatización</button>
+          <button type="button" class="chip" [class.active]="categoriaActiva === 'soporte'" (click)="cambiarCategoria('soporte')">Soporte</button>
+          <button type="button" class="chip" [class.active]="categoriaActiva === 'academico'" (click)="cambiarCategoria('academico')">Académico</button>
+          <button type="button" class="chip chip-clear" (click)="limpiarFiltros()">Limpiar</button>
+        </div>
+      </div>
     </div>
     
     <div class="cards-grid">
-      @for (item of publicidad; track item.titulo) {
-        <article class="service-card glass-card">
-          <div class="card-icon">{{ item.icon }}</div>
-          <h3 class="card-title">{{ item.titulo }}</h3>
-          <p class="card-desc">{{ item.descripcion }}</p>
+      @for (item of publicidadFiltrada; track item.titulo) {
+        <article class="service-card" (click)="item.flipped = !item.flipped" [class.is-flipped]="item.flipped">
+          <div class="card-inner">
+            <div class="card-front glass-card">
+              <div class="card-icon">{{ item.icon }}</div>
+              <h3 class="card-title">{{ item.titulo }}</h3>
+              <p class="card-desc">{{ item.descripcion }}</p>
+              <div class="flip-hint">Clic para ver más ⟳</div>
+            </div>
+            
+            <div class="card-back glass-card">
+              <h3 class="card-title">{{ item.titulo }}</h3>
+              <p class="card-desc">{{ item.infoAdicional }}</p>
+              <div class="flip-hint">Clic para regresar ⟲</div>
+            </div>
+          </div>
+        </article>
+      }
+
+      @if (publicidadFiltrada.length === 0) {
+        <article class="empty-state glass-card">
+          <h3>Sin resultados</h3>
+          <p>No encontramos servicios con ese filtro. Prueba con otra palabra o categoría.</p>
         </article>
       }
     </div>
@@ -52,9 +89,15 @@
       <p>
         <strong>WhatsApp:</strong> 
         @for (wa of whatsappNumbers; track wa.phone) {
-          <br/>&nbsp;&nbsp;<a [href]="wa.link" target="_blank" rel="noopener noreferrer">{{ wa.phone }}</a>
+          <span class="contact-line">
+            <a [href]="wa.link" target="_blank" rel="noopener noreferrer">{{ wa.phone }}</a>
+            <button type="button" class="copy-btn" (click)="copiarWhatsApp(wa.phone)">Copiar</button>
+          </span>
         }
       </p>
+      @if (mensajeCopia) {
+        <p class="copy-msg">{{ mensajeCopia }}</p>
+      }
       <p><strong>Correo:</strong>&nbsp;&nbsp;<a [href]="'mailto:' + email">{{ email }}</a></p>
     </div>
 
