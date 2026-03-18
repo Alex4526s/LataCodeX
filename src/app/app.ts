@@ -16,9 +16,9 @@ export class App {
   protected readonly email = 'alexcaisalitin11@gmail.com';
 
   protected readonly redesSociales = [
-    { nombre: 'TikTok', url: 'https://tiktok.com/@codesoftlata', icon: 'tiktok' },
-    { nombre: 'Instagram', url: 'https://www.instagram.com/codesoftlata?igsh=MTAyeDhxZThvcXVsaQ==', icon: 'instagram' },
-    { nombre: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61580792023259', icon: 'facebook' }
+    { nombre: 'TikTok', url: 'https://www.tiktok.com/@latacodex' },
+    { nombre: 'Instagram', url: 'https://www.instagram.com/latacodex?igsh=MTAyeDhxZThvcXVsaQ==' },
+    { nombre: 'Facebook', url: '#' }
   ];
 
   protected readonly publicidad = [
