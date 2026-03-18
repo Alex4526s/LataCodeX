@@ -346,6 +346,21 @@
    MEDIA QUERIES
    ========================================================================= */
 @media (max-width: 768px) {
+  .logo {
+    height: 48px;
+  }
+  
+  .brand-text {
+    font-size: 1.1rem;
+    display: none; /* Oculta el texto en móviles para priorizar el logo y botón */
+  }
+
+  .nav-cta {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
   .hero {
     padding: 80px 5% 60px;
     margin: 20px;
