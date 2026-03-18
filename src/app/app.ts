@@ -32,6 +32,17 @@ export class App {
       titulo: 'Promoción de Desarrollo Web',
       descripcion: 'Creamos tu página web profesional con diseño moderno y adaptable.',
       infoAdicional: 'Plan profesional: configuración de dominio y hosting, diseño responsive y botón directo a WhatsApp.',
+      funciones: [
+        'Landing pages y sitios corporativos',
+        'Tiendas en línea con catálogo de productos',
+        'Panel administrativo para productos y contenido',
+        'Integración con API y bases de datos',
+        'Formularios avanzados con validación',
+        'Botón directo a WhatsApp y automatización de contacto',
+        'Mejoras de velocidad y rendimiento web',
+        'Seguridad básica, backups y monitoreo',
+        'Soporte post-entrega y capacitación'
+      ],
       categoria: 'web',
       icon: '🚀',
       flipped: false
@@ -71,7 +82,8 @@ export class App {
         !termino ||
         item.titulo.toLowerCase().includes(termino) ||
         item.descripcion.toLowerCase().includes(termino) ||
-        item.infoAdicional.toLowerCase().includes(termino);
+        item.infoAdicional.toLowerCase().includes(termino) ||
+        item.funciones?.some((funcion) => funcion.toLowerCase().includes(termino));
 
       return coincideCategoria && coincideTexto;
     });

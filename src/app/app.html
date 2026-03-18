@@ -61,6 +61,13 @@
             <div class="card-back glass-card">
               <h3 class="card-title">{{ item.titulo }}</h3>
               <p class="card-desc">{{ item.infoAdicional }}</p>
+              @if (item.funciones?.length) {
+                <ul class="feature-list">
+                  @for (funcion of item.funciones; track funcion) {
+                    <li class="feature-item">{{ funcion }}</li>
+                  }
+                </ul>
+              }
               <div class="flip-hint">Clic para regresar ⟲</div>
             </div>
           </div>
