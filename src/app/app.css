@@ -263,6 +263,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   margin-bottom: 48px;
+  align-items: start;
 }
 
 .empty-state {
@@ -286,14 +287,14 @@
 .service-card {
   perspective: 1200px;
   cursor: pointer;
-  min-height: 350px;
+  min-height: auto;
 }
 
 .card-inner {
   display: grid;
+  position: relative;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
-  height: 100%;
 }
 
 .service-card.is-flipped .card-inner {
@@ -323,9 +324,18 @@
 }
 
 .card-back {
+  position: absolute;
+  inset: 0;
   transform: rotateY(180deg);
   background: rgba(5, 20, 50, 0.95);
   border-color: rgba(0, 210, 255, 0.4);
+  overflow-y: auto;
+}
+
+.service-card.is-flipped .card-back {
+  position: relative;
+  inset: auto;
+  overflow-y: visible;
 }
 
 .card-front::after, .card-back::after {
@@ -349,7 +359,7 @@
 .flip-hint {
   font-size: 0.8rem;
   color: var(--accent-cyan);
-  margin-top: auto;
+  margin-top: 14px;
   padding-top: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
